@@ -10,11 +10,17 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs')
 const { body, check, validationResult } = require('express-validator');
 app.use('/public', express.static(__dirname + '/public'))
+var morgan = require('morgan')
+
+app.use(morgan('dev'));
+
 
 app.use((req, res, next) => {
   console.log('Time:', Date.now())
   next()
 })
+
+
 
 app.use(express.urlencoded({extended:true}));
 const updateContact = (contactBaru) => {
@@ -172,12 +178,12 @@ app.get('/delete/:name', (req, res) => {
     
 })
 
-app.get('/about', (req, res,next) => {
+app.get('/about', (req, res) => {
     
     res.render("about",{
         layout:'layout/main2',
     })
-    next()
+   
 })
 
 app.get('/contact', (req, res) => {
