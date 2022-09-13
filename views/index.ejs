@@ -1,0 +1,39 @@
+
+ <div class="container">
+
+   <h1 style="margin-top: 30px;">Web Server Node Js <%= nama %></h1>
+   <h2>Welcome to my App</h2>
+   <h5>List Contact :</h5>
+   <div><a href="/add"><button class="btn btn-primary">Add Contact</button></a></div>
+   <% if(dbPath.length<1){ %> 
+       <p>Contact data is empty</p>
+       <% }else{ %> 
+   
+   
+           <div class="d-grid gap-3 border-success" >
+               <table class="table table-striped">
+                   <thead>
+                       <tr>
+                           <th scope="col">Name</th>
+                           <th scope="col">Email</th>
+                           <th>Action</th>
+                           
+                       </tr>
+                   </thead>
+                   <tbody>
+               <% dbPath.forEach(c => { %>
+             <tr>
+               <td><%= c.name %></td>
+               <td><%= c.email %></td>
+               <td><a href="/delete/<%= c.name %> " method="delete">
+                <button type="submit" onclick="return comfirm('sure want to delete??')" class="btn btn-danger">delete</button>
+               </a>
+                <a href="/contact/edit/<%=c.name %>  " > <button type="submit" class="btn btn-primary">Update</button></a></td>
+             </tr>
+             <% }) %>
+             
+           </tbody>
+         </table>
+   <% } %> 
+ </div>
+
